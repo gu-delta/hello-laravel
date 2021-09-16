@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="utf-8">
-    <title>My BBS</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
-    <div class="container">
-        <h1>{{ $post }}</h1>
-    </div>
-</body>
-</html>
+<x-layout>
+	<x-slot name="title">
+		{{ $post }} - My BBS
+	</x-slot>
+	<div class="back-link">
+		{{-- &laquo; <a href="/">Back</a> --}}
+		&laquo; <a href="{{ route('posts.index') }}">Back</a>
+	</div>
+
+	<h1>{{ $post }}</h1>
+</x-layout>
