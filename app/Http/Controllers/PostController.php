@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Http\Requests\PostRequest;
 
 class PostController extends Controller
 {
@@ -25,16 +26,8 @@ class PostController extends Controller
 		return view('posts.create');
 	}
 
-	public function store(Request $request)
+	public function store(PostRequest $request)
 	{
-		$request->validate([
-			'title' => 'required|min:3',
-			'body' => 'required',
-		], [
-			'title.required' => 'タイトルは必須です',
-			'title.min' => ':min 文字以上入力してください',
-			'body.required' => '本文は必須です',
-		]);
 		$post = new Post();
 		$post->title = $request->title;
 		$post->body = $request->body;
@@ -52,15 +45,6 @@ class PostController extends Controller
 
 	public function update(Request $request, Post $post)
 	{
-		$request->validate([
-			'title' => 'required|min:3',
-			'body' => 'required',
-		], [
-			'title.required' => 'タイトルは必須です',
-			'title.min' => ':min 文字以上入力してください',
-			'body.required' => '本文は必須です',
-		]);
-
 		$post->title = $request->title;
 		$post->body = $request->body;
 		$post->save();
