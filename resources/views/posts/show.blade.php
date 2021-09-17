@@ -1,11 +1,34 @@
 <x-layout>
 	<x-slot name="title">
-		{{ $post }} - My BBS
+		{{ $post->title }} - My BBS
 	</x-slot>
 	<div class="back-link">
 		{{-- &laquo; <a href="/">Back</a> --}}
 		&laquo; <a href="{{ route('posts.index') }}">Back</a>
 	</div>
+	<h1>
+		<span>{{ $post->title }}</span>
+		<a href="{{ route('posts.edit', $post) }}">[Edit]</a>
+		<form method="post" action="{{ route('posts.destroy', $post) }}" id="delete_post">
+			@method('DELETE')
+			@csrf
+			<button class="btn">[x]</button>
+		</form>
+	</h1>
+	<p>{!! nl2br(e($post->body)) !!}
+	<script>
+		'use strict';
 
-	<h1>{{ $post }}</h1>
+		{
+			document.getElementById('delete_post').addEventListener('submit', e => {
+				e.preventDefault();
+
+				if (!confirm('Sure to delete?')) {
+					return;
+				}
+
+				e.target.submit();
+			});
+		}
+	</script>
 </x-layout>
