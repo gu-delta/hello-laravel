@@ -8,5 +8,5 @@
 	</div>
 
 	<h1>{{ $post->title }}</h1>
-	<p>{{ $post->body }}
+	<p>{!! nl2br(e($post->body)) !!}
 </x-layout>
