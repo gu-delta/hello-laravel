@@ -39,8 +39,7 @@ class PostController extends Controller
 
 	public function edit(Post $post)
 	{
-		return view('posts.edit')
-			->with(['post' => $post]);
+		return view('posts.edit')->with(['post' => $post]);
 	}
 
 	public function update(Request $request, Post $post)
@@ -49,7 +48,13 @@ class PostController extends Controller
 		$post->body = $request->body;
 		$post->save();
 
-		return redirect()
-			->route('posts.show', $post);
+		return redirect()->route('posts.show', $post);
+	}
+
+	public function destroy(Post $post)
+	{
+		$post->delete();
+
+		return redirect()->route('posts.index');
 	}
 }
